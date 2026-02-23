@@ -1,0 +1,59 @@
+name: Docling
+
+services:
+  backend:
+    image: docling
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: Docling
+    ports:
+      - "${API_PORT:-8001}:8000"
+      - "${UI_PORT:-8502}:8501"
+    volumes:
+      - ../data:/app/data
+    environment:
+      - DATA_ROOT=/app/data
+      - PYTHONPATH=/app/backend/src
+      - BACKEND_URL=http://127.0.0.1:8000
+    working_dir: /app
+    # Extraction (PDF parsing) can use a lot of RAM; give the container enough to avoid OOM "Killed"
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+
+  # Optional: run backend and UI as separate services for development
+  backend-only:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${API_PORT_DEV:-8002}:8000"
+    volumes:
+      - ../data:/app/data
+    environment:
+      - DATA_ROOT=/app/data
+      - PYTHONPATH=/app/backend/src
+    working_dir: /app/backend/src
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    profiles:
+      - dev
+
+  ui-only:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${UI_PORT_DEV:-8503}:8501"
+    volumes:
+      - ../data:/app/data
+      - ../ui:/app/ui
+    environment:
+      - BACKEND_URL=http://backend-only:8000
+    working_dir: /app
+    command: streamlit run ui/streamlit_app.py --server.port 8501 --server.address 0.0.0.0
+    depends_on:
+      - backend-only
+    profiles:
+      - dev

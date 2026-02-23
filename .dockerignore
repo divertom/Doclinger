@@ -1,0 +1,43 @@
+# Virtual envs and Python cache
+Docling/
+.venv/
+venv/
+env/
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+.pytest_cache/
+.mypy_cache/
+**/*.egg-info/
+.eggs/
+
+# Git and IDE
+.git/
+.gitignore
+.cursor/
+.vscode/
+.idea/
+*.swp
+*~
+
+# Docker
+docker/.dockerignore
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+
+# Docs and local data (data/ is mounted at runtime)
+README.md
+RESERVED.md
+*.md
+!backend/**/*.md
+
+# Tests (not needed in image)
+**/tests/
+**/*_test.py
+**/test_*.py
+
+# Data and env (mounted or env at runtime)
+data/
+.env
+.env.*

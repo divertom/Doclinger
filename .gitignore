@@ -1,0 +1,44 @@
+# Virtual envs
+Docling/
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+.eggs/
+
+# Data (uploads/outputs; keep layout if needed)
+data/uploads/*
+data/outputs/*
+!data/uploads/.gitkeep
+!data/outputs/.gitkeep
+!data/examples/.gitkeep
+
+# IDE and OS
+.idea/
+.vscode/
+.cursor/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Env files and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local project notes (do not push)
+RESERVED.md
+
+# Code bundle for inspection (do not push)
+docling-ui-code.zip
+docling-ui-inspection.zip
