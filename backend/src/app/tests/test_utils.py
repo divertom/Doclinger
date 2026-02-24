@@ -5,7 +5,7 @@ from app.core.utils import sanitize_stem
 
 
 def test_sanitize_stem_basic():
-    assert sanitize_stem("Hydraulics Manual v3.pdf") == "Hydraulics_Manual_v3"
+    assert sanitize_stem("User Guide v2.pdf") == "User_Guide_v2"
     assert sanitize_stem("report.pdf") == "report"
     assert sanitize_stem("doc.docx") == "doc"
 

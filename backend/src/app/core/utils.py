@@ -14,7 +14,7 @@ MAX_STEM_LENGTH = 80
 def sanitize_stem(filename: str) -> str:
     """
     Derive a filesystem-safe artifact prefix from a filename.
-    Example: "Hydraulics Manual v3.pdf" => "Hydraulics_Manual_v3"
+    Example: "User Guide v2.pdf" => "User_Guide_v2"
     """
     stem = Path(filename).stem.strip()
     if not stem or stem.startswith("."):
